@@ -6,6 +6,10 @@ import Hotel from "./pages/eachHotel/Hotel.jsx"
 import Login from './pages/login/Login';
 import Register from "./pages/register/Register.jsx";
 
+import AddFeedback from './pages/feedback/AddFeedback.js'
+import EditFeedback from "./pages/feedback/EditFeedback";
+import FeedbackList from "./pages/feedback/FeedbackList";
+
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +19,9 @@ function App() {
         <Route path="/hotels/:id" element={<Hotel/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/addFeedback" element={<AddFeedback/>} />
+        <Route path="/editFeedback" element={<EditFeedback/>} />
+        <Route path="/feedbackList" element={<FeedbackList/>} />
       </Routes>
     </BrowserRouter>
   );

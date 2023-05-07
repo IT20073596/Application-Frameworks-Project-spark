@@ -1,0 +1,76 @@
+.background {
+    background-image: url('../../static/images/hotel-main-page.jpeg');
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    height: 100%;
+}
+
+.content-div {
+    min-height: 50%;
+    width: 50%;
+    border-radius: 25px;
+    background-color: bisque;
+    border: solid 1px rgb(107, 0, 0);
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    font-size: 25px;
+    padding: 20px 0px;
+}
+
+.input-div {
+    padding-bottom: 20px;
+}
+
+.center-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: rgb(187, 103, 0);
+}
+
+.list-div {
+    height: 80%;
+    width: 80%;
+    border-radius: 25px;
+    background-color: bisque;
+    border: solid 1px rgb(107, 0, 0);
+    padding: 20px;
+}
+
+.list-item {
+    padding: 10px;
+    border-bottom: solid 1px rgb(107, 0, 0);
+}
+
+.list-name {
+    text-align: left;
+    color: black;
+    font-weight: bold;
+    font-size: 10px;
+    padding: 5px 0px;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.icon-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
