@@ -8,11 +8,11 @@ import { useLocation, useNavigate } from 'react-router-dom'
 export default function EditFeedback() {
   const [name, setName] = useState("");
   const [feedback, setFeedback] = useState("");
-  const [rate, setRate] = useState(0);
   const location = useLocation()
+  const [rate, setRate] = useState(location.state.rating);
+  const navigate = useNavigate()
 
-  const id = location.state;
-  console.log(location);
+  const id = location.state.id;
 
   const ratingChanged = (newRating) => {
     setRate(newRating);
@@ -33,11 +33,11 @@ export default function EditFeedback() {
   }
 
   const getFeedbackInfo = () => {
-    axios.post("http://localhost:9000/feedbacks/getFeedbackByid", { id: id }).then(res => {
+    axios.post("http://localhost:3000/feedbacks/getFeedbackByid", { id: id }).then(res => {
         const feedback = res.data;
         setName(feedback.name)
         setFeedback(feedback.feedback)
-        setRate(feedback.rating)
+        // setRate(feedback.rating)
     }).catch(err => {
         errorMsg('Error retrieving data')
     })
@@ -51,9 +51,10 @@ export default function EditFeedback() {
         rating: rate
     }
 
-    axios.post("http://localhost:9000/feedbacks/updateFeedback", passData).then(res => {
-        successMsg('Successfully Updated')
-        refreshForm()
+    axios.post("http://localhost:3000/feedbacks/updateFeedback", passData).then(res => {
+        successMsg('Successfully Updated').then(res => {
+          navigate(-1)
+        })
     }).catch(err => {
         errorMsg('Failed to update')
     })
@@ -65,7 +66,7 @@ export default function EditFeedback() {
 
   return (
     <>
-      <div className="background">
+      <div className="blue-bg">
         <div className="content-div">
           <div className="title">Edit Feedback</div>
 

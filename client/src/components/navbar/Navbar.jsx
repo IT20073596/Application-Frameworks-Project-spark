@@ -28,6 +28,7 @@ const Navbar = () => {
     const logOut = () => {
         setOpenModal(false)
         localStorage.removeItem('user')
+        localStorage.removeItem("isAdmin")
         document.location.reload(true)
     }
 

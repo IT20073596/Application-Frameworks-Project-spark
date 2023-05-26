@@ -3,10 +3,11 @@ import Feedbacks from "../models/feedback.model.js";
 
 // Add feedbacks for a place
 const addFeedback = asyncHandler(async (req,res) => {
-    const { name, feedback, rating, placeId, userId } = req.body;
+    console.log(req);
+    const { name, feedback, rating, placeId } = req.body;
 
     const feedbackObj = new Feedbacks({
-        name, feedback, rating, placeId, userId
+        name, feedback, rating, placeId
     })
 
     try {

@@ -3,42 +3,55 @@ import axios from 'axios'
 import "./feedback.css";
 import ReactStars from "react-rating-stars-component";
 import { successMsg, errorMsg } from "./common/ResponseMsgs";
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import deleteIcon from '../../static/images/feedback-delete-icon.png';
 import editIcon from '../../static/images/feedback-edit-icon.png'
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
 
-export default function FeedbackList() {
+export default function FeedbackList(props) {
     const [feedbacks, setFeedbacks] = useState([])
     const isDeleteAvailable = window.localStorage.getItem("userType") == 1;
     const userId = window.localStorage.getItem("userId")
     const navigate = useNavigate()
-    console.log(feedbacks);
+    const isAdminUser = localStorage.getItem("isAdmin")
 
+    const isTrimmed = props.trim;
+
+    console.log(typeof isAdminUser);
 
     const getAllFeedbacks = () => {
-        axios.get("http://localhost:9000/feedbacks/viewAllFeedbacks").then(res => {
+        axios.get("http://localhost:3000/feedbacks/viewAllFeedbacks").then(res => {
             setFeedbacks(res.data)
         }).catch(err => {
             errorMsg('Error retriving data')
         })
     }
 
-    const openEditPage = (id) => {
+    const openEditPage = (id, rating) => {
         console.log(id);
-        navigate("/editFeedback", { state: id })
+        navigate("/editFeedback", { state: {
+            id, rating
+        } })
+    }
+
+    const openAddPage = () => {
+        navigate('/addFeedback')
     }
 
     const deleteFeedback = (id) => {
-        axios.post("http://localhost:9000/feedbacks/deleteFeedback", { id: id }).then(res => {
+        axios.post("http://localhost:3000/feedbacks/deleteFeedback", { id: id }).then(res => {
             successMsg('Successfully deleted')
             getAllFeedbacks()
         }).then(err => {
-            errorMsg('Error deleting')
+            successMsg('Successfully deleted')
+            getAllFeedbacks()
         })
     }
 
     const isEditEnabled = (id) => {
-        return id === userId
+        // return id === userId
+        return isAdminUser;
     }
 
     useEffect(() => {
@@ -47,11 +60,71 @@ export default function FeedbackList() {
 
     return (
         <>
+            {/* <div className="background"> */}
+            { !isTrimmed &&
+                <Navbar /> }
+            { !isTrimmed &&
+                <Header /> }
+            { !isTrimmed &&
+                <div style={{ height: '50px' }}></div> }
             <div className="background">
                 <div className="list-div">
-                    <div className="title">All Feedbacks</div>
+                    { !isTrimmed &&
+                        <div className="row m-0">
+                            <div className="col-3"></div>
+                            <div className="col-6">
+                                <div className="title">All Feedbacks</div>
+                            </div>
+                            <div className="col-3">
+                            <button type="button" class="btn submit-btn" onClick={openAddPage}>
+                                Add new Feedback
+                            </button>
+                            </div>
+                        </div>
+                    }
 
-                    { feedbacks.map(function(item) {
+                    {/* Trimmed to 3 */}
+                    { isTrimmed && feedbacks.slice(0,3).map(function(item) {
+                        return <div className="list-item">
+                            <div className="row m-0">
+                                <div className="col col-9">
+                                    <div className="list-name">
+                                        { item.name }
+                                    </div>
+                                    <div>
+                                        { item.feedback }
+                                    </div>
+                                    <div>
+                                    <ReactStars
+                                        count={5}
+                                        size={30}
+                                        activeColor="#ffd700"
+                                        isHalf
+                                        edit={false}
+                                        value={item.rating}
+                                    />
+                                    </div>
+                                </div>
+                                <div className="col col-3">
+                        	        {/* <div className="row m-0" style={{ height: "100%" }}>
+                                        <div className="col-6">
+                                            <div className="icon-area">
+                                                { isDeleteAvailable && <img src={deleteIcon} className="icon" onClick={() => deleteFeedback(item._id)}/> }
+                                            </div>
+                                        </div>
+                                        <div className="col-6">
+                                            <div className="icon-area">
+                                                { isEditEnabled(item.userId) && <img src={editIcon} className="icon" onClick={() => openEditPage(item._id)}/> }
+                                            </div>
+                                        </div>
+                                    </div> */}
+                                </div>
+                            </div>
+                        </div>
+                    }) }
+
+                    {/* Not trimmed to 3 */}
+                    { !isTrimmed && feedbacks.map(function(item) {
                         return <div className="list-item">
                             <div className="row m-0">
                                 <div className="col col-9">
@@ -76,12 +149,12 @@ export default function FeedbackList() {
                         	        <div className="row m-0" style={{ height: "100%" }}>
                                         <div className="col-6">
                                             <div className="icon-area">
-                                                { isDeleteAvailable && <img src={deleteIcon} className="icon" onClick={() => deleteFeedback(item._id)}/> }
+                                                { isAdminUser && <img src={deleteIcon} className="icon" onClick={() => deleteFeedback(item._id)}/> }
                                             </div>
                                         </div>
                                         <div className="col-6">
                                             <div className="icon-area">
-                                                { isEditEnabled(item.userId) && <img src={editIcon} className="icon" onClick={() => openEditPage(item._id)}/> }
+                                                { isEditEnabled(item.userId) && <img src={editIcon} className="icon" onClick={() => openEditPage(item._id, item.rating)}/> }
                                             </div>
                                         </div>
                                     </div>

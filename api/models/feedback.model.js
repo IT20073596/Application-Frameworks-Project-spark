@@ -16,10 +16,6 @@ const feedbackSchema = mongoose.Schema({
     placeId: {
         type: 'String',
         required: true
-    },
-    userId: {
-        type: 'String',
-        required: true
     }
 })
 

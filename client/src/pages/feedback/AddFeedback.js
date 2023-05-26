@@ -3,13 +3,16 @@ import axios from 'axios'
 import "./feedback.css";
 import ReactStars from "react-rating-stars-component";
 import { successMsg, errorMsg } from "./common/ResponseMsgs";
+import { useNavigate } from "react-router-dom";
 
 export default function AddFeedback() {
   const [name, setName] = useState("");
   const [feedback, setFeedback] = useState("");
   const [rate, setRate] = useState(0);
   const [placeId, setPlaceId] = useState(1);
-  const userId = window.localStorage.getItem("userId")
+  const user = JSON.parse(localStorage.getItem("user")) || null
+  const navigate = useNavigate()
+  const userId = user ? user._id : null;
 
   const ratingChanged = (newRating) => {
     setRate(newRating);
@@ -37,10 +40,11 @@ export default function AddFeedback() {
         placeId: placeId,
         userId: userId
     }
-
-    axios.post("http://localhost:9000/feedbacks/addFeedback", passData).then(res => {
-        successMsg('Successfully Created')
-        refreshForm()
+    
+    axios.post("http://localhost:3000/feedbacks/addFeedback", passData).then(res => {
+        successMsg('Successfully Created').then(res => {
+          navigate(-1)
+        })
     }).catch(err => {
         errorMsg('Failed to create')
     })
@@ -48,7 +52,7 @@ export default function AddFeedback() {
 
   return (
     <>
-      <div className="background">
+      <div className="blue-bg">
         <div className="content-div">
           <div className="title">Add Feedback</div>
 
