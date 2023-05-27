@@ -51,5 +51,36 @@ router.post("/logout", async (req, res) => {
   }
 });
 
+router.delete("/user/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletead = await User.findByIdAndDelete(id);
+    res.status(201).json(deletead);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+});
+
+router.put("/user/update/:id", async (req, res) => {
+  const { email, password, name, age } = req.body;
+  if (
+    !email || !password|| !name|| !age
+  ) {
+    res.status(422).json("Please enter all data");
+    return 0;
+  }
+  try {
+    const { id } = req.params;
+
+    const updatead1 = await User.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+
+    res.status(201).json(updatead1);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+});
+
 
 module.exports = router;
