@@ -9,6 +9,7 @@ const Logout = () => {
             const response = await fetch("http://localhost:8060/users/logout", { method: "POST" });
             const data = await response.json();
             console.log(data.message);
+            localStorage.removeItem("logged")
             navigate("/");
         } catch (error) {
             console.log(error);

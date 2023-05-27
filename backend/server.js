@@ -1,3 +1,4 @@
+const FeedbackRoutes = require('./routes/feedback.router.js')
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -15,6 +16,7 @@ app.use(cors());
 const userRoute = require("./routes/userManagement/user.route");
 app.use("/users", userRoute);
 app.use("/hotelbooking", require("./routes/hotelbookingManagement/hotelbooking.route"));
+app.use("/feedbacks", FeedbackRoutes);
 
 // Database connection
 mongoose

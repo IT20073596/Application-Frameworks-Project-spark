@@ -27,6 +27,7 @@ const Rooms = () => {
       <a href='/addhotelbooking' style={{ color: '#FFA500', textDecoration: 'none', marginRight: '20px', fontSize: '20px' }}>Booking</a>
       <a href='/allusers' style={{ color: '#008080', textDecoration: 'none', marginRight: '20px', fontSize: '20px' }}>View All Users</a>
       <a href='/allbooking' style={{ color: '#8B0000', textDecoration: 'none', marginRight: '20px', fontSize: '20px' }}>All Bookings</a>
+      <a href='/feedbackList' style={{ color: '#8B0000', textDecoration: 'none', marginRight: '20px', fontSize: '20px' }}>Feedbacks</a>
       <h1 style={{ color: '#FFA500', marginTop: '40px', marginBottom: '20px' }}>Rooms</h1>
       <input type="text" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)} style={{ padding: '10px', borderRadius: '5px', border: 'none', marginBottom: '20px', fontSize: '18px' }} />
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>

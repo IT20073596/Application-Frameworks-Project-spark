@@ -16,6 +16,7 @@ const Login = () => {
         password,
       });
       console.log(data);
+      localStorage.setItem("logged", true)
       navigate("/rooms");
     } catch (error) {
       console.error(error);
