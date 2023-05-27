@@ -62,7 +62,7 @@ router.delete("/user/delete/:id", async (req, res) => {
 });
 
 router.put("/user/update/:id", async (req, res) => {
-  const { email, password, name, age } = req.body;
+  const { email, name, age } = req.body;
   if (
     !email || !password|| !name|| !age
   ) {

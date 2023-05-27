@@ -94,7 +94,7 @@ export default function FeedbackList(props) {
                                     <div className="list-name">
                                         { item.name }
                                     </div>
-                                    <div>
+                                    <div style={{ textAlign: "left" }}>
                                         { item.feedback }
                                     </div>
                                     <div>

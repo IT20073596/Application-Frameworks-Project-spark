@@ -12,11 +12,18 @@ function AllUsers() {
     }
     fetchData();
   }, []);
+  const handleUpdate = (user) => {
+    localStorage.setItem("userid", user._id)
+    localStorage.setItem("name", user.name)
+    localStorage.setItem("age", user.age)
+    localStorage.setItem("email", user.email)
+    // window.URL('/editUser')
+  }
   async function handleDelete(element) {
     console.log('hjeieue')
     try {
         await axios
-          .delete(`http://localhost:8060/user/delete/${element._id}`)
+          .delete(`http://localhost:8060/users/user/delete/${element._id}`)
           .then((res) => {
             if (res.status === 201) {
               alert("Deleted successfully....");
@@ -59,9 +66,10 @@ function AllUsers() {
   Delete
 </button>
 
-  <Link
+<Link
     style={{ backgroundColor: "blue", color: "white", padding: "5px", border: 'none', borderRadius: '5px', textDecoration:"none" }}
-    to={`/updatead/`}
+    to={`/editUser`}
+    onClick={() => handleUpdate(user)}
     className="btn btn-secondary mr-2"
   >
     Update

@@ -7,6 +7,7 @@ import ViewAllBookings from "./components/hotelBooking/viewAllBookings";
 import UpdateHotelBooking from "./components/hotelBooking/updateHotelBooking";
 import AllUsers from "./components/user/allUsers";
 import Logout from "./components/user/logout";
+import EditUser from "./components/user/editUser";
 import AddFeedback from '../src/components/feedback/AddFeedback'
 import EditFeedback from "../src/components/feedback/EditFeedback";
 import FeedbackList from "../src/components/feedback/FeedbackList";
@@ -22,6 +23,7 @@ function Router() {
               <Route path="/" element={<Login/>}/>
               <Route path="/allusers" element={<AllUsers/>}/>
               <Route path="/allbooking" element={<ViewAllBookings/>}/>
+              <Route path="/editUser" element={<EditUser/>}/>
               <Route path="/updatead/:id" element={<UpdateHotelBooking/>}/>
               <Route path="/addFeedback" element={<AddFeedback/>} />
               <Route path="/editFeedback" element={<EditFeedback/>} />

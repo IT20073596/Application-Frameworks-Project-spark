@@ -10,9 +10,9 @@ export default function AddFeedback() {
   const [feedback, setFeedback] = useState("");
   const [rate, setRate] = useState(0);
   const [placeId, setPlaceId] = useState(1);
-  const user = JSON.parse(localStorage.getItem("user")) || null
+  // const user = JSON.parse(localStorage.getItem("user")) || null
   const navigate = useNavigate()
-  const userId = user ? user._id : null;
+  const userId = localStorage.getItem("userId");
 
   const ratingChanged = (newRating) => {
     setRate(newRating);

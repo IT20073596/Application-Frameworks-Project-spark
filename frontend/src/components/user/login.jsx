@@ -79,6 +79,12 @@ const Login = () => {
             textDecoration: "none",
             marginLeft: "10px",
           }}>Sign Up</a>
+
+        <a href='/feedbackList' style={{
+            color: "#2196f3",
+            textDecoration: "none",
+            marginLeft: "10px",
+          }}>Feedbacks</a>
       </form>
     </div>
   );
